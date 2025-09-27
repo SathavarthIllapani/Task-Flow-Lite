@@ -1,0 +1,22 @@
+export function renderTaskList(taskListElement, tasks) {
+  taskListElement.innerHTML = "";
+
+  if (tasks.length === 0) {
+    taskListElement.innerHTML = `<li class="empty-state">No tasks yet! Add one above 👆</li>`;
+    return;
+  }
+
+  tasks.forEach(task => {
+    const li = document.createElement("li");
+    li.className = `task ${task.completed ? "completed" : ""}`;
+    li.dataset.id = task.id;
+    li.innerHTML = `
+      <label>
+        <input type="checkbox" ${task.completed ? "checked" : ""}>
+        <span>${task.text}</span>
+      </label>
+      <button class="delete-btn">🗑</button>
+    `;
+    taskListElement.appendChild(li);
+  });
+}
