@@ -1,3 +1,6 @@
 export function validateTaskInput(text) {
-  return text.trim().length > 0 && text.length <= 100;
+  if (typeof text !== "string") return false;
+  
+  const trimmedText = text.trim();
+  return trimmedText.length > 0 && trimmedText.length <= 100;
 }

@@ -1,7 +1,17 @@
 export const saveTasks = (tasks) => {
-  localStorage.setItem("tasks", JSON.stringify(tasks));
+  try {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  } catch (error) {
+    console.error("Failed to save tasks to localStorage:", error);
+  }
 };
 
 export const loadTasks = () => {
-  return JSON.parse(localStorage.getItem("tasks")) || [];
+  try {
+    const savedTasks = localStorage.getItem("tasks");
+    return savedTasks ? JSON.parse(savedTasks) : [];
+  } catch (error) {
+    console.error("Failed to load tasks from localStorage:", error);
+    return [];
+  }
 };
